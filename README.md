@@ -64,3 +64,7 @@ This library registers the following classes and methods for reflection:
 ## Version Compatibility
 
 The version of this library matches the version of the AWS SDK DynamoDB Enhanced Client it's compatible with. For example, version `2.32.7` of this library is compatible with version `2.32.7` of the AWS SDK DynamoDB Enhanced Client.
+
+## Credits
+
+This library is based on the work from [quarkus-dynamodb-enhanced](https://github.com/Nithanim/quarkus-dynamodb-enhanced) by Nithanim. The original implementation was a crucial contribution to making AWS DynamoDB Enhanced Client work with GraalVM Native Image.
