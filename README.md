@@ -65,6 +65,32 @@ This library registers the following classes and methods for reflection:
 
 The version of this library matches the version of the AWS SDK DynamoDB Enhanced Client it's compatible with. For example, version `2.32.7` of this library is compatible with version `2.32.7` of the AWS SDK DynamoDB Enhanced Client.
 
+## Information from Original Implementation
+
+The following sections are taken directly from the [README of the original implementation](https://github.com/Nithanim/quarkus-dynamodb-enhanced#what-does-it-do-technically) by Nithanim, which was the foundation for this library.
+
+### What does it do technically
+
+In short, the AWS SDK tries to create and load lambdas at runtime but since the native-image is pre-compiled, this is not possible.
+
+Instead, the predecessor, MethodHandles are used instead which are fully supported.
+
+There is also an additional bugfix for quarkus in there that deals with multiple classloaders when running tests. Although this is a separate issue, the same fix described above conveniently fixed this too.
+
+As a bonus, since the `DynamoDbBean`s are accessed by reflection, they are automatically registered for this purpose in the GraalVM native-image generation.
+This means that you do not need to add `@RegisterForReflection` to all your beans.
+
+If want to know even more about the technical side, feel free to dive into the code.
+You can find extensive information in the javadoc (and of course the code itself)!
+
+### Can I use it in production?
+
+Probably. You certainly have to decide for yourself if you want to take the risk. See the disclaimer in the license!
+
+I just researched and spent weeks trying to fix all problems because I needed it for work. (However, there is no association! I did that in my free time!)
+
+We deployed it in production and has been running happily since!
+
 ## Credits
 
 This library is based on the work from [quarkus-dynamodb-enhanced](https://github.com/Nithanim/quarkus-dynamodb-enhanced) by Nithanim. The original implementation was a crucial contribution to making AWS DynamoDB Enhanced Client work with GraalVM Native Image.
